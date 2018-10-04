@@ -11,31 +11,27 @@ const clients = [
 	}
 ];
 
-const users = [
-	{
-		id: '123',
-		username: 'AndrewEvans',
-		password: '12345'
-	}
-];
 
-const tokens = [
-	{
-		accessToken: 'uhflsuhflusfhwsy249yoh0834h',
-		accessTokenExpiresAt: new Date(2018, 9, 20),
-		scope: 'READ',
-		client: { id: '1' },
-		user: { id: '123' }
-	}
-];
+const scopes = [{
+    client_id: '1',
+    scopes: ['READ STUFF', 'CONVERT STUFF', 'RENDER STUFF']
+}, 
+{
+    client_id: '2',
+    scopes: ['READ STUFF']
+}, 
+{
+    client_id: '3',
+    scopes: ['CONVERT STUFF']
+}];
+
 
 const generateAccessToken = (client, user, scope) => {
-	let token = jwt.sign({ user: user.id, scope }, secretKey, {
+	let token = jwt.sign({ user: null, scope }, secretKey, {
 		expiresIn: 3600,
 		subject: client.id
 	});
 	return token;
-
 };
 
 const getClient = (clientId, clientSecret) => {
